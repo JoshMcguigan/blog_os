@@ -5,5 +5,11 @@ Implementation of the OS tutorials at [https://os.phil-opp.com/](https://os.phil
 ## Build
 
 ```rust
-cargo rustc -- -Z pre-link-arg=-lSystem
+bootimage build
+```
+
+## Boot
+
+```rust
+bootimage run
 ```
