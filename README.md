@@ -11,5 +11,5 @@ bootimage build
 ## Boot
 
 ```rust
-bootimage run
+bootimage run -- -serial mon:stdio
 ```
