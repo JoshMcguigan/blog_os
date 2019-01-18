@@ -21,5 +21,14 @@ pub extern "C" fn _start() -> ! {
     println!("Hello World{}", "!");
     serial_println!("Hello Host{}", "!");
 
+    exit_qemu();
+
     loop {}
+}
+
+fn exit_qemu() {
+    use x86_64::instructions::port::Port;
+
+    let mut port = Port::<u32>::new(0xf4);
+    unsafe { port.write(0); }
 }
