@@ -8,8 +8,10 @@ use blog_os::println;
 #[cfg(not(test))]
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
-    println!("Hello World{}", "!");
+    blog_os::gdt::init();
+    blog_os::interrupts::init_idt();
 
+    println!("It did not crash!");
     loop {}
 }
 
