@@ -4,15 +4,18 @@
 
 use core::panic::PanicInfo;
 use blog_os::println;
+use blog_os::interrupts::PICS;
 
 #[cfg(not(test))]
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
     blog_os::gdt::init();
     blog_os::interrupts::init_idt();
+    unsafe { PICS.lock().initialize() };
+    x86_64::instructions::interrupts::enable();
 
     println!("It did not crash!");
-    loop {}
+    blog_os::hlt_loop();
 }
 
 #[cfg(not(test))]
@@ -20,5 +23,5 @@ pub extern "C" fn _start() -> ! {
 fn panic(info: &PanicInfo) -> ! {
     println!("{}", info);
 
-    loop {}
+    blog_os::hlt_loop();
 }
