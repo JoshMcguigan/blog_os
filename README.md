@@ -4,12 +4,18 @@ Implementation of the OS tutorials at [https://os.phil-opp.com/](https://os.phil
 
 ## Build
 
-```rust
+```bash
 bootimage build
 ```
 
 ## Boot
 
-```rust
-bootimage run -- -serial mon:stdio -device isa-debug-exit,iobase=0xf4,iosize=0x04 -display none
+```bash
+bootimage run -- -serial mon:stdio -device isa-debug-exit,iobase=0xf4,iosize=0x04
+```
+
+## Test
+
+```bash
+bootimage test
 ```

@@ -1,22 +1,22 @@
-#![cfg_attr(not(test), no_std)]
+#![no_std]
 #![cfg_attr(not(test), no_main)]
-#![cfg_attr(test, allow(unused_imports))]
+#![cfg_attr(test, allow(dead_code, unused_macros, unused_imports))]
 
 use core::panic::PanicInfo;
-use blog_os::println;
+use blog_os::{exit_qemu, serial_println};
 
 #[cfg(not(test))]
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
-    println!("Hello World{}", "!");
-
-    loop {}
+    panic!();
 }
+
 
 #[cfg(not(test))]
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
-    println!("{}", info);
+    serial_println!("ok");
 
+    unsafe { exit_qemu(); }
     loop {}
 }
